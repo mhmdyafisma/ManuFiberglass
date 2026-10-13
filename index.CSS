@@ -12,11 +12,12 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 75px; /* Ensures section anchors don't hide under fixed navbar */
+  overflow-x: clip;
 }
 
 body {
   font-family: 'Trebuchet MS', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
   padding-top: 70px; /* Accounts for fixed navbar */
   background-color: #f8f9fa;
   color: #333333;
@@ -116,6 +117,31 @@ body {
   position: relative;
 }
 
+/* Sticky Stacking Cards for Services */
+.sticky-service-card {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 70px; /* Sticks directly below the 70px fixed navbar */
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+#laser-section {
+  z-index: 1;
+}
+
+#cnc-section {
+  z-index: 2;
+  box-shadow: 0 -12px 30px rgba(0, 0, 0, 0.08);
+}
+
+#bend-section {
+  z-index: 3;
+  box-shadow: 0 -12px 30px rgba(0, 0, 0, 0.08);
+}
+
 .service-title {
   font-family: Copperplate, 'Trebuchet MS', Papyrus, fantasy, sans-serif;
   font-size: clamp(1.8rem, 3.5vw, 2.5rem);
@@ -156,6 +182,9 @@ body {
   padding: 60px 0;
   background-color: #1e242d;
   color: #ffffff;
+  position: relative;
+  z-index: 4;
+  box-shadow: 0 -12px 30px rgba(0, 0, 0, 0.15);
 }
 
 .location-title {
@@ -185,6 +214,8 @@ body {
   padding: 50px 0 30px;
   background-color: #11151a;
   color: #ffffff;
+  position: relative;
+  z-index: 4;
 }
 
 .contact-title {
@@ -216,6 +247,12 @@ body {
 @media (max-width: 991.98px) {
   body {
     padding-top: 65px;
+  }
+  
+  .sticky-service-card {
+    top: 65px;
+    min-height: auto;
+    padding: 45px 0;
   }
   
   .navbar-collapse {
@@ -251,6 +288,10 @@ body {
     min-height: 480px;
   }
   
+  .sticky-service-card {
+    padding: 35px 0;
+  }
+
   .service-img {
     height: 220px;
   }
@@ -267,5 +308,14 @@ body {
   
   .map-wrapper {
     height: 400px;
+  }
+}
+
+/* Fallback for ultra-short screens / landscape mobile */
+@media (max-height: 550px) {
+  .sticky-service-card {
+    position: relative;
+    top: auto;
+    min-height: auto;
   }
 }
